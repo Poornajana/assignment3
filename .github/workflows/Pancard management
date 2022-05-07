@@ -1,0 +1,16 @@
+#include<graphics.h>
+#include <fstream.h>
+#include <conio.h>
+#include<iostream.h>
+#include <string.h>
+#include <stdlib.h>
+#include<dos.h>
+#include<stdio.h>
+#include<ctype.h>
+#include<iomanip.h>
+ fstream pfile;
+int isAlpha(char ch){	if(isalpha(ch))	 return 1;	
+ else	 
+return 0;} 
+int checkreg(char reg[])//check if PAN_NO is valid{if(((strlen(reg)==10)&&isalpha(reg[0]))&&(isalpha(reg[3]))&&(isalpha(reg[4]))&&(isdigit(reg[7]))&&(isdigit(reg[8]))&&(isalpha(reg[9]))&&(isalpha(reg[1]))&&(isalpha(reg[2]))&&(isdigit(reg[5]))&&(isdigit(reg[6])))return 1;elsereturn 0;}int checkDOB(char DOB[])//check if DOB is valid{	if((strlen(DOB)==10&&isdigit(DOB[0]))&&(isdigit(DOB[1]))&&(DOB[2]=='/')&&(isdigit(DOB[3]))&&(isdigit(DOB[4]))&&(DOB[5]=='/')&&(isdigit(DOB[6]))&&(isdigit(DOB[7]))&&(isdigit(DOB[8]))&&(isdigit(DOB[9])))	return 1;	else	return 0;}int checkFather_name(char Father_name[]){	int valid=0,i;	for(i=0;i<strlen(Father_name);i++) if((isAlpha(Father_name[i])==0)&&(Father_name[i]!=' '))	{	 valid=1;	 break;	 }	 return(valid); }int checkName(char *Name){	int valid=1,i;	for(i=0;i<strlen(Name);i++)	if(isAlpha(Name[i])==0 && Name[i]!=' ')	{	 valid=0;	 break;	 }	 return(valid); } class block		// class for block	 {	 public:		 char keys[4][11];		 block *link;		 int disp[4];		 int cnt;		 block();		 ~block(){}		 void split();		 void merge();	 };/*************************************************/class SSET		// class for sequence set	 {	 public:			typedef block *BK;		 SSET();		 ~SSET(){}		 void create();		 int Insert(char*,int);		 void del(char*);		 block *FindNode(char*);		 void display();	 };/**************************************************/class node	// class for btree node	 {	 public:		 char keys[4][11];		 node *dptrs[4];		 node *uptr;		 block *ptr[4];			int cnt;		 node();		 ~node(){}			int isLeaf();		 void split(node *,node *,node *);	 };/**************************************************/class btree // class for btree	 {	 public:		 btree();		 int insert(char*,block *);		 node* findLeaf(char*,int&);
+
